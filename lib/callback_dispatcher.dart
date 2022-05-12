@@ -4,11 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 void callbackDispatcher() {
-  const _backgroundChannel =
+  const backgroundChannel =
       MethodChannel('dev.krgm4d/timer_manager_background');
   WidgetsFlutterBinding.ensureInitialized();
 
-  _backgroundChannel.setMethodCallHandler((call) async {
+  backgroundChannel.setMethodCallHandler((call) async {
     final List<dynamic> args = call.arguments;
     final callback = PluginUtilities.getCallbackFromHandle(
       CallbackHandle.fromRawHandle(args[0]),
@@ -28,5 +28,5 @@ void callbackDispatcher() {
     callback(time);
   });
 
-  _backgroundChannel.invokeMethod('TimerService.initialized');
+  backgroundChannel.invokeMethod('TimerService.initialized');
 }
